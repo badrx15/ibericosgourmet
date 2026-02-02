@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu pedido! - Ibéricos Deluxe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-jamon { color: #5c0a12; }
+    </style>
+</head>
+<body class="bg-stone-50 flex items-center justify-center min-h-screen p-4">
+    <div class="max-w-md w-full bg-white rounded-[32px] shadow-2xl p-10 text-center border border-stone-200">
+        <div class="mb-6 text-green-500">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <i class="fas fa-check text-4xl"></i>
+            </div>
+        </div>
+        <h1 class="font-serif text-3xl font-black text-jamon mb-4" id="successTitle">¡Pedido Recibido!</h1>
+        <p class="text-stone-600 mb-8 leading-relaxed" id="successMessage">
+            Gracias por confiar en <b>Ibéricos Deluxe</b>. Tu pago ha sido procesado correctamente y nuestro maestro cortador ya está preparando tu pedido.
+        </p>
+        
+        <div class="bg-stone-50 rounded-2xl p-6 mb-8 border border-stone-100">
+            <div class="text-xs font-bold text-stone-400 uppercase mb-1" id="orderLabel">ID de tu pedido</div>
+            <div class="text-xl font-black text-stone-800 tracking-wider">#<%= orderId %></div>
+        </div>
+
+        <div class="space-y-4">
+            <div class="flex items-center gap-4 text-left text-sm text-stone-500 bg-stone-50 p-4 rounded-xl" id="methodBox">
+                <i class="fas fa-truck text-jamon text-lg"></i>
+                <p id="methodText">Recibirás un email con el seguimiento de tu envío en las próximas 24h.</p>
+            </div>
+            
+            <a href="/" class="block w-full bg-jamon text-white py-4 rounded-xl font-black hover:opacity-90 transition-all">
+                VOLVER A LA TIENDA
+            </a>
+        </div>
+        
+        <p class="mt-8 text-[10px] text-stone-400 uppercase font-bold tracking-widest">Ibéricos Deluxe S.L.</p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const method = urlParams.get('method');
+        
+        if (method === 'cod') {
+            document.getElementById('successTitle').innerText = '¡Pedido Registrado!';
+            document.getElementById('successMessage').innerHTML = 'Tu pedido contrareembolso ha sido recibido. Prepárate para disfrutar del mejor ibérico directamente en tu casa.';
+            document.getElementById('methodBox').className = 'flex items-center gap-4 text-left text-sm text-stone-600 bg-jamon/5 p-4 rounded-xl border border-jamon/20';
+            document.getElementById('methodText').innerHTML = '<b>Pago en la entrega:</b> Recuerda tener el importe exacto (incluyendo los 3€ de gestión) para el repartidor.';
+        }
+    </script>
+</body>
+</html>
