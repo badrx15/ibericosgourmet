@@ -85,12 +85,14 @@ ${city}, CP: ${postalCode}
             return res.redirect(`/success?order_id=${orderId}&method=cod`);
         }
 
-        // Lógica para TARJETA (Dodo Payments SDK Simplificado con Precio Dinámico)
+        // Lógica para TARJETA (Dodo Payments SDK con Precio Dinámico Corregido)
+        console.log(`Creando sesión para ${productName} a ${totalAmount}€`);
+        
         const sessionDodo = await client.checkoutSessions.create({
             product_cart: [{
                 product_id: process.env.DODO_PRODUCT_ID, 
                 quantity: 1,
-                price: Math.round(totalAmount * 100) // Precio dinámico en céntimos (Dodo SDK espera céntimos)
+                amount: Math.round(totalAmount * 100) // Probamos con 'amount' en lugar de 'price'
             }],
             customer: {
                 name: name,
@@ -104,7 +106,9 @@ ${city}, CP: ${postalCode}
             },
             metadata: {
                 order_id: orderId,
-                type: 'jamon_order'
+                type: 'jamon_order',
+                product_name: productName,
+                amount: totalAmount.toString()
             },
             return_url: `${req.protocol}://${req.get('host')}/success?order_id=${orderId}`,
         });
