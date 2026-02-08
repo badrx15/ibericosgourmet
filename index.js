@@ -85,11 +85,12 @@ ${city}, CP: ${postalCode}
             return res.redirect(`/success?order_id=${orderId}&method=cod`);
         }
 
-        // Lógica para TARJETA (Dodo Payments SDK Simplificado)
+        // Lógica para TARJETA (Dodo Payments SDK Simplificado con Precio Dinámico)
         const sessionDodo = await client.checkoutSessions.create({
             product_cart: [{
                 product_id: process.env.DODO_PRODUCT_ID, 
-                quantity: 1
+                quantity: 1,
+                price: Math.round(totalAmount * 100) // Precio dinámico en céntimos (Dodo SDK espera céntimos)
             }],
             customer: {
                 name: name,
