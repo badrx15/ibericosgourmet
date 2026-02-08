@@ -23,7 +23,7 @@ if (ADMIN_CHAT_ID && process.env.TELEGRAM_BOT_TOKEN) {
 // Initialize Dodo Payments client
 const client = new DodoPayments({
     bearerToken: process.env.DODO_PAYMENTS_API_KEY,
-    environment: process.env.DODO_ENVIRONMENT || 'test_mode'
+    environment: process.env.DODO_ENVIRONMENT === 'live' ? 'live_mode' : 'test_mode'
 });
 
 // Set up EJS
@@ -85,11 +85,11 @@ ${city}, CP: ${postalCode}
             return res.redirect(`/success?order_id=${orderId}&method=cod`);
         }
 
-        // Lógica para TARJETA (Dodo Payments)
+        // Lógica para TARJETA (Dodo Payments SDK Simplificado)
         const sessionDodo = await client.checkoutSessions.create({
             product_cart: [{
                 product_id: process.env.DODO_PRODUCT_ID, 
-                quantity: 1 // Tratamos el pack como una unidad de venta
+                quantity: 1
             }],
             customer: {
                 name: name,
@@ -103,11 +103,7 @@ ${city}, CP: ${postalCode}
             },
             metadata: {
                 order_id: orderId,
-                type: 'jamon_order',
-                customer_name: name,
-                customer_address: `${address}, ${city}, CP: ${postalCode}`,
-                product_name: productName,
-                total_sobres: quantity // Guardamos cuántos sobres reales incluye el pack
+                type: 'jamon_order'
             },
             return_url: `${req.protocol}://${req.get('host')}/success?order_id=${orderId}`,
         });
