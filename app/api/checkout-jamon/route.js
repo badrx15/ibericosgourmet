@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { Client, Environment } from 'square';
+import { SquareClient, SquareEnvironment } from 'square';
 import TelegramBot from 'node-telegram-bot-api';
 import { v4 as uuidv4 } from 'uuid';
 
 // Configuración de Square
-const squareClient = new Client({
-    accessToken: process.env.SQUARE_ACCESS_TOKEN || 'sandbox-token-placeholder',
-    environment: process.env.SQUARE_ENVIRONMENT === 'production' ? Environment.Production : Environment.Sandbox,
+const squareClient = new SquareClient({
+    token: process.env.SQUARE_ACCESS_TOKEN || 'sandbox-token-placeholder',
+    environment: process.env.SQUARE_ENVIRONMENT === 'production' ? SquareEnvironment.Production : SquareEnvironment.Sandbox,
 });
 
 // Configuración de Telegram
