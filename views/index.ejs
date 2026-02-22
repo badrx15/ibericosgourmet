@@ -57,10 +57,10 @@
                         10 SOBRES (100g c/u)
                     </div>
                     <div class="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
-                        49.99€
+                        72.99€
                     </div>
                     <div class="text-stone-400 font-bold uppercase text-xs tracking-widest mb-8">Envío Gratis + Regalo</div>
-                    <button onclick="openModal('Pack 10 Sobres Ibérico', 49.99, 10)" class="w-full bg-jamon text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
+                    <button onclick="openModal('Pack 10 Sobres Ibérico', 67.99, 72.99, 10)" class="w-full bg-jamon text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
                         PEDIR PACK 10
                     </button>
                 </div>
@@ -71,10 +71,10 @@
                         20 SOBRES (100g c/u)
                     </div>
                     <div class="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
-                        89.99€
+                        129.99€
                     </div>
                     <div class="text-stone-500 font-bold uppercase text-xs tracking-widest mb-8">Mejor Valor - Envío Gratis + Regalo</div>
-                    <button onclick="openModal('Pack 20 Sobres Ibérico', 89.99, 20)" class="w-full bg-stone-900 text-white py-5 rounded-2xl font-black text-lg shadow-xl hover:bg-jamon transition-all">
+                    <button onclick="openModal('Pack 20 Sobres Ibérico', 121.99, 129.99, 20)" class="w-full bg-stone-900 text-white py-5 rounded-2xl font-black text-lg shadow-xl hover:bg-jamon transition-all">
                         PEDIR PACK 20
                     </button>
                 </div>
@@ -200,18 +200,18 @@
                         <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Método de Pago</label>
                         <div class="grid grid-cols-2 gap-4">
                             <label class="relative flex flex-col p-4 bg-stone-50 border-2 border-stone-200 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all has-[:checked]:border-jamon has-[:checked]:bg-jamon/5">
-                                <input type="radio" name="paymentMethod" value="card" checked class="absolute opacity-0" onchange="updateTotalDisplay()">
-                                <span class="flex items-center gap-2 font-bold text-sm">
-                                    <i class="fas fa-credit-card text-jamon"></i> Tarjeta
-                                </span>
-                                <span class="text-[10px] text-stone-400 mt-1">Dodo Payments</span>
-                            </label>
-                            <label class="relative flex flex-col p-4 bg-stone-50 border-2 border-stone-200 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all has-[:checked]:border-jamon has-[:checked]:bg-jamon/5">
-                                <input type="radio" name="paymentMethod" value="cod" class="absolute opacity-0" onchange="updateTotalDisplay()">
+                                <input type="radio" name="paymentMethod" value="cod" checked class="absolute opacity-0" onchange="updateTotalDisplay()">
                                 <span class="flex items-center gap-2 font-bold text-sm">
                                     <i class="fas fa-hand-holding-usd text-jamon"></i> Contrareembolso
                                 </span>
-                                <span class="text-[10px] text-stone-400 mt-1">+3.00€ extra</span>
+                                <span class="text-[10px] text-stone-400 mt-1">Recomendado</span>
+                            </label>
+                            <label class="relative flex flex-col p-4 bg-stone-50 border-2 border-stone-200 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all has-[:checked]:border-jamon has-[:checked]:bg-jamon/5">
+                                <input type="radio" name="paymentMethod" value="card" class="absolute opacity-0" onchange="updateTotalDisplay()">
+                                <span class="flex items-center gap-2 font-bold text-sm">
+                                    <i class="fas fa-credit-card text-jamon"></i> Tarjeta
+                                </span>
+                                <span class="text-[10px] text-stone-400 mt-1">Square Gateway</span>
                             </label>
                         </div>
                     </div>
@@ -265,12 +265,14 @@
     </footer>
 
     <script>
-        let currentPrice = 0;
+        let currentCardPrice = 0;
+        let currentCodPrice = 0;
 
-        function openModal(name, price, quantity) {
-            currentPrice = price;
+        function openModal(name, cardPrice, codPrice, quantity) {
+            currentCardPrice = cardPrice;
+            currentCodPrice = codPrice;
+            
             document.getElementById('modalProductName').value = name;
-            document.getElementById('modalPrice').value = price;
             document.getElementById('modalQuantity').value = quantity;
             
             document.getElementById('displayProductName').innerText = name;
@@ -281,8 +283,10 @@
 
         function updateTotalDisplay() {
             const isCod = document.querySelector('input[name="paymentMethod"]:checked').value === 'cod';
-            const finalPrice = isCod ? (currentPrice + 3) : currentPrice;
+            const finalPrice = isCod ? currentCodPrice : currentCardPrice;
+            
             document.getElementById('displayPrice').innerText = finalPrice.toFixed(2) + '€';
+            document.getElementById('modalPrice').value = finalPrice;
             
             // Actualizar el botón de pago
             const payBtn = document.querySelector('#buyModal button[type="submit"]');

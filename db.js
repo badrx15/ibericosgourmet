@@ -1,9 +1,17 @@
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
 
-const db = new Database(path.join(__dirname, 'database.sqlite'));
+// Determine database path
+// On Vercel, only /tmp is writable. In local development, use project root.
+const dbPath = process.env.VERCEL 
+    ? path.join('/tmp', 'database.sqlite') 
+    : path.join(__dirname, 'database.sqlite');
 
-// Tabla de Pedidos de Jamón
+// Initialize database
+const db = new Database(dbPath);
+
+// Create tables if they don't exist
 db.prepare(`
     CREATE TABLE IF NOT EXISTS orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

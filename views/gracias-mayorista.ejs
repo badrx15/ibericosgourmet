@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud Recibida - Ibéricos Gourmet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-jamon { color: #5c0a12; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 flex items-center justify-center min-h-screen">
+
+    <div class="max-w-2xl w-full mx-4 text-center">
+        <div class="bg-white p-12 rounded-[2.5rem] shadow-2xl border-4 border-stone-100 relative overflow-hidden">
+            <!-- Decorative circle -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-jamon/5 rounded-full blur-3xl"></div>
+            
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                <i class="fas fa-check text-4xl text-green-600"></i>
+            </div>
+            
+            <h1 class="font-serif text-4xl md:text-5xl font-black mb-6 text-stone-900">
+                ¡Solicitud Recibida!
+            </h1>
+            
+            <p class="text-xl text-stone-500 mb-8 leading-relaxed">
+                Gracias por tu interés en distribuir nuestros productos. Hemos recibido tus datos correctamente.
+            </p>
+            
+            <div class="bg-stone-50 p-6 rounded-2xl mb-10 border border-stone-200">
+                <p class="font-bold text-jamon text-lg mb-2">¿Qué sucede ahora?</p>
+                <p class="text-stone-500">
+                    Nuestro equipo comercial revisará tu solicitud y se pondrá en contacto contigo en las próximas <strong>24-48 horas</strong> para enviarte las tarifas especiales para mayoristas.
+                </p>
+            </div>
+            
+            <a href="/" class="inline-block bg-stone-900 text-white px-8 py-4 rounded-xl font-black text-lg hover:bg-jamon transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                VOLVER AL INICIO
+            </a>
+        </div>
+        
+        <p class="mt-8 text-stone-400 text-xs font-bold uppercase tracking-widest">
+            Ibéricos Gourmet S.L.
+        </p>
+    </div>
+
+</body>
+</html>
