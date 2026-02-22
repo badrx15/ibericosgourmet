@@ -41,9 +41,10 @@ export async function POST(request) {
         let totalAmount = price;
         const isCod = paymentMethod === 'cod';
         
-        if (isCod) {
-            totalAmount += 3.00; // Cargo extra por contrareembolso
-        }
+        // Ya no añadimos +3€ extra aquí porque el precio base ya es distinto para COD
+        // if (isCod) {
+        //    totalAmount += 3.00; 
+        // }
 
         // Lógica para CONTRAREEMBOLSO
         if (isCod) {
@@ -55,7 +56,7 @@ export async function POST(request) {
 🆔 <b>ID Pedido:</b> #${orderId}
 🍖 <b>Pack:</b> ${productName}
 🔢 <b>Contenido:</b> ${quantity} sobres (100g)
-💰 <b>Total a Cobrar:</b> ${totalAmount.toFixed(2)}€ (Incluye +3€ COD)
+💰 <b>Total a Cobrar:</b> ${totalAmount.toFixed(2)}€ (Precio COD)
 
 👤 <b>Cliente:</b> ${name}
 📧 <b>Email:</b> ${email}
