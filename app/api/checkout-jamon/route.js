@@ -91,32 +91,52 @@ ${city}, CP: ${postalCode}
             }
         };
 
-        const response = await squareClient.checkoutApi.createPaymentLink(body);
-        const paymentLink = response.result.paymentLink;
+        console.log("Enviando petición a Square...");
+
+        const response = await squareClient.checkout.paymentLinks.create(body);
+        
+        // Serializar respuesta de forma segura (BigInt)
+        console.log("Respuesta de Square:", JSON.stringify(response, (key, value) =>
+            typeof value === 'bigint' ? value.toString() : value
+        ));
+
+        // Adaptar manejo de respuesta para SDK v44+
+        // Puede venir directamente en response.paymentLink o en response.result.paymentLink
+        const paymentLink = response.paymentLink || (response.result && response.result.paymentLink);
 
         if (paymentLink && paymentLink.url) {
             // Notificar intento de pago (opcional, o hacerlo en success)
             if (bot && ADMIN_CHAT_ID) {
-                 const message = `
-💳 <b>¡INTENTO DE PAGO CON TARJETA!</b> 💳
+                const message = `
+💳 <b>INTENTO DE PAGO CON TARJETA</b> 💳
 
 🆔 <b>ID Pedido:</b> #${orderId}
-🍖 <b>Pack:</b> ${productName}
-💰 <b>Importe:</b> ${totalAmount.toFixed(2)}€
-👤 <b>Cliente:</b> ${name}
+💰 <b>Total:</b> ${totalAmount.toFixed(2)}€
+� <b>Link Generado:</b> <a href="${paymentLink.url}">Pagar Aquí</a>
 
-⏳ <i>El cliente ha sido redirigido a Square. Esperando confirmación.</i>
+<i>El cliente ha sido redirigido a la pasarela de pago.</i>
                 `;
-                await bot.sendMessage(ADMIN_CHAT_ID, message, { parse_mode: 'HTML' });
+                try {
+                    await bot.sendMessage(ADMIN_CHAT_ID, message, { parse_mode: 'HTML' });
+                } catch (telegramError) {
+                    console.error("Error enviando notificación a Telegram:", telegramError);
+                }
             }
 
             return NextResponse.redirect(paymentLink.url, 303);
         } else {
-            throw new Error('No checkout URL received from Square');
+            console.error('Error al crear link de pago:', response);
+            return NextResponse.json({ error: 'No se pudo generar el link de pago' }, { status: 500 });
         }
 
     } catch (error) {
         console.error('Error Checkout Jamón:', error);
-        return NextResponse.json({ error: 'Error al procesar el pedido' }, { status: 500 });
+        if (error.errors) {
+            console.error('Detalles del error de Square:', JSON.stringify(error.errors, null, 2));
+        }
+        return NextResponse.json({ 
+            error: 'Error al procesar el pedido',
+            details: error.message 
+        }, { status: 500 });
     }
 }
