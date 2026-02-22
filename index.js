@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { SquareClient, SquareEnvironment } = require('square');
+const { Client, Environment } = require('square');
 const path = require('path');
 const db = require('./db');
 const TelegramBot = require('node-telegram-bot-api');
@@ -10,20 +10,30 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Configuración de Admin Telegram
-const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID; // ID del admin para recibir notificaciones
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
+const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID;
+const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 
-// Enviar mensaje de prueba al iniciar para verificar el bot
-if (ADMIN_CHAT_ID && process.env.TELEGRAM_BOT_TOKEN) {
-    bot.sendMessage(ADMIN_CHAT_ID, "🚀 Servidor de Jamonería iniciado y bot vinculado correctamente (Square Gateway).")
-        .then(() => console.log("Mensaje de prueba enviado a Telegram con éxito."))
-        .catch(err => console.error("Error al enviar mensaje de prueba a Telegram:", err.message));
+let bot = null;
+if (telegramToken) {
+    try {
+        bot = new TelegramBot(telegramToken, { polling: false });
+        
+        // Enviar mensaje de prueba al iniciar (opcional, solo si hay chat ID)
+        if (ADMIN_CHAT_ID) {
+            bot.sendMessage(ADMIN_CHAT_ID, "🚀 Servidor de Jamonería iniciado en Vercel.")
+                .catch(err => console.error("Error al enviar mensaje de inicio:", err.message));
+        }
+    } catch (error) {
+        console.error("Error inicializando Telegram Bot:", error);
+    }
+} else {
+    console.warn("⚠️ TELEGRAM_BOT_TOKEN no configurado. Las notificaciones no funcionarán.");
 }
 
 // Initialize Square client
-const squareClient = new SquareClient({
-    token: process.env.SQUARE_ACCESS_TOKEN,
-    environment: process.env.SQUARE_ENVIRONMENT === 'production' ? SquareEnvironment.Production : SquareEnvironment.Sandbox,
+const squareClient = new Client({
+    accessToken: process.env.SQUARE_ACCESS_TOKEN || 'sandbox-token-placeholder', // Evitar crash si falta token
+    environment: process.env.SQUARE_ENVIRONMENT === 'production' ? Environment.Production : Environment.Sandbox,
 });
 
 // Set up EJS
@@ -105,8 +115,8 @@ ${city}, CP: ${postalCode}
             }
         };
 
-        const response = await squareClient.checkout.paymentLinks.create(body);
-        const paymentLink = response.paymentLink;
+        const response = await squareClient.checkoutApi.createPaymentLink(body);
+        const paymentLink = response.result.paymentLink;
 
         if (paymentLink && paymentLink.url) {
             // Guardar pedido pendiente en DB (Pago con Tarjeta Square)

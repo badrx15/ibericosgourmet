@@ -2,14 +2,27 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-// Determine database path
-// On Vercel, only /tmp is writable. In local development, use project root.
-const dbPath = process.env.VERCEL 
-    ? path.join('/tmp', 'database.sqlite') 
-    : path.join(__dirname, 'database.sqlite');
-
-// Initialize database
-const db = new Database(dbPath);
+let db;
+try {
+    // Check if we are in a Vercel environment
+    // VERCEL is set to '1' in Vercel.
+    const isVercel = process.env.VERCEL === '1';
+    
+    if (isVercel) {
+        // Use in-memory database for Vercel (Ephemeral, safe, fast)
+        console.log('Running on Vercel: Using in-memory SQLite database');
+        db = new Database(':memory:');
+    } else {
+        // Local development: Use file-based DB
+        const dbPath = path.join(__dirname, 'database.sqlite');
+        db = new Database(dbPath);
+    }
+} catch (err) {
+    console.error('Failed to initialize database:', err);
+    // Fallback to memory in case of any error (e.g. read-only filesystem)
+    console.log('Falling back to in-memory database');
+    db = new Database(':memory:');
+}
 
 // Create tables if they don't exist
 db.prepare(`
