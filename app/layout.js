@@ -2,7 +2,7 @@ export const metadata = {
   title: 'Ibéricos Gourmet - Jamón de Cebo de Campo 75% Ibérico',
   description: 'La excelencia del ibérico en sobres de 100g, listos para disfrutar. Envío Gratis y Regalo Sorpresa incluido.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icon.svg',
   },
 }
 
