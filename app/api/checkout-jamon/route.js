@@ -31,7 +31,8 @@ export async function POST(request) {
         const paymentMethod = formData.get('paymentMethod');
         
         const name = formData.get('name');
-        const email = formData.get('email');
+        const email = formData.get('email') || 'No especificado';
+        const phone = formData.get('phone');
         const address = formData.get('address');
         const city = formData.get('city');
         const postalCode = formData.get('postalCode');
@@ -59,6 +60,7 @@ export async function POST(request) {
 💰 <b>Total a Cobrar:</b> ${totalAmount.toFixed(2)}€ (Precio COD)
 
 👤 <b>Cliente:</b> ${name}
+📞 <b>Teléfono:</b> ${phone}
 📧 <b>Email:</b> ${email}
 
 📍 <b>DIRECCIÓN DE ENVÍO:</b>
@@ -113,7 +115,11 @@ ${city}, CP: ${postalCode}
 
 🆔 <b>ID Pedido:</b> #${orderId}
 💰 <b>Total:</b> ${totalAmount.toFixed(2)}€
-� <b>Link Generado:</b> <a href="${paymentLink.url}">Pagar Aquí</a>
+🔗 <b>Link Generado:</b> <a href="${paymentLink.url}">Pagar Aquí</a>
+
+👤 <b>Cliente:</b> ${name}
+📞 <b>Teléfono:</b> ${phone}
+📧 <b>Email:</b> ${email}
 
 <i>El cliente ha sido redirigido a la pasarela de pago.</i>
                 `;
