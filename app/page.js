@@ -112,8 +112,8 @@ export default function Home() {
       <section className="py-12 bg-stone-50 overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <div className="relative">
-            <img src="https://images.unsplash.com/photo-1599021419847-d8a7a6aba5b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Sobres de Jamón" className="rounded-[3rem] shadow-2xl mx-auto mb-12 border-8 border-white" />
-            <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-3xl shadow-xl hidden md:block border border-stone-100">
+            <img src="/plato-jamon.png" alt="Plato de Jamón Ibérico Cortado a Cuchillo" className="rounded-full shadow-2xl mx-auto mb-12 border-8 border-white w-full max-w-md md:max-w-lg hover:scale-105 transition-transform duration-500" />
+            <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-3xl shadow-xl hidden md:block border border-stone-100 animate-bounce">
               <p className="font-serif text-2xl font-black text-jamon italic">"Calidad que se deshace en la boca"</p>
             </div>
           </div>
