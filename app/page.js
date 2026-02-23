@@ -24,6 +24,21 @@ export default function Home() {
     setModalData({ name, cardPrice, codPrice, quantity });
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
+
+    // Google Analytics Event: Begin Checkout
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'begin_checkout', {
+        currency: 'EUR',
+        value: codPrice,
+        items: [
+          {
+            item_name: name,
+            quantity: quantity,
+            price: codPrice
+          }
+        ]
+      });
+    }
   };
 
   const closeModal = () => {

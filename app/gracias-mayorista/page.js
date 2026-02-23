@@ -1,6 +1,19 @@
+'use client';
+
+import { useEffect } from 'react';
 import Link from 'next/link';
 
 export default function GraciasMayoristaPage() {
+  useEffect(() => {
+    // Google Analytics Event: Generate Lead
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', {
+        currency: 'EUR',
+        value: 0
+      });
+    }
+  }, []);
+
   return (
     <div className="bg-stone-50 text-stone-900 flex items-center justify-center min-h-screen p-4">
       <div className="max-w-2xl w-full mx-4 text-center">
