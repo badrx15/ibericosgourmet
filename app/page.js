@@ -234,20 +234,22 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Método de Pago</label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="cod" checked={paymentMethod === 'cod'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <span className="flex items-center gap-2 font-bold text-sm break-words">
-                        <i className="fas fa-hand-holding-usd text-jamon shrink-0"></i> <span className="text-xs sm:text-sm">Contrareembolso</span>
-                      </span>
-                      <span className="text-[10px] text-stone-400 mt-1">Recomendado</span>
+                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
+                        <i className="fas fa-hand-holding-usd text-jamon text-lg sm:text-base"></i>
+                        <span>Contrareembolso</span>
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Recomendado</span>
                     </label>
-                    <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
+                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="card" checked={paymentMethod === 'card'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <span className="flex items-center gap-2 font-bold text-sm">
-                        <i className="fas fa-credit-card text-jamon shrink-0"></i> <span className="text-xs sm:text-sm">Tarjeta</span>
-                      </span>
-                      <span className="text-[10px] text-stone-400 mt-1">Square Gateway</span>
+                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
+                        <i className="fas fa-credit-card text-jamon text-lg sm:text-base"></i>
+                        <span>Tarjeta</span>
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Square Gateway</span>
                     </label>
                   </div>
                 </div>
