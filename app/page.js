@@ -237,15 +237,15 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-4">
                     <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="cod" checked={paymentMethod === 'cod'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <span className="flex items-center gap-2 font-bold text-sm">
-                        <i className="fas fa-hand-holding-usd text-jamon"></i> Contrareembolso
+                      <span className="flex items-center gap-2 font-bold text-sm break-words">
+                        <i className="fas fa-hand-holding-usd text-jamon shrink-0"></i> <span className="text-xs sm:text-sm">Contrareembolso</span>
                       </span>
                       <span className="text-[10px] text-stone-400 mt-1">Recomendado</span>
                     </label>
                     <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="card" checked={paymentMethod === 'card'} onChange={handlePaymentChange} className="absolute opacity-0" />
                       <span className="flex items-center gap-2 font-bold text-sm">
-                        <i className="fas fa-credit-card text-jamon"></i> Tarjeta
+                        <i className="fas fa-credit-card text-jamon shrink-0"></i> <span className="text-xs sm:text-sm">Tarjeta</span>
                       </span>
                       <span className="text-[10px] text-stone-400 mt-1">Square Gateway</span>
                     </label>
