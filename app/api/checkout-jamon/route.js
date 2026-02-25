@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { SquareClient, SquareEnvironment } from 'square';
 import TelegramBot from 'node-telegram-bot-api';
 import { v4 as uuidv4 } from 'uuid';
+import prisma from '@/lib/prisma';
 
 // Configuración de Square
 const squareClient = new SquareClient({
@@ -42,10 +43,28 @@ export async function POST(request) {
         let totalAmount = price;
         const isCod = paymentMethod === 'cod';
         
-        // Ya no añadimos +3€ extra aquí porque el precio base ya es distinto para COD
-        // if (isCod) {
-        //    totalAmount += 3.00; 
-        // }
+        // Guardar pedido en base de datos
+        try {
+            await prisma.order.create({
+                data: {
+                    orderId,
+                    productName,
+                    quantity,
+                    totalAmount,
+                    paymentMethod,
+                    status: isCod ? 'pending' : 'pending_payment',
+                    customerName: name,
+                    email,
+                    phone,
+                    address,
+                    city,
+                    postalCode
+                }
+            });
+        } catch (dbError) {
+            console.error('Error guardando pedido en DB:', dbError);
+            // No bloqueamos el flujo si falla la DB, pero lo logueamos
+        }
 
         // Lógica para CONTRAREEMBOLSO
         if (isCod) {
