@@ -1,7 +1,5 @@
 node_modules/
+package-lock.json
 .DS_Store
 .env
 database.sqlite
-dev.db
-dev.db-journal
-prisma/generated/

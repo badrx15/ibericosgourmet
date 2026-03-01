@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { SquareClient, SquareEnvironment } from 'square';
 import TelegramBot from 'node-telegram-bot-api';
 import { v4 as uuidv4 } from 'uuid';
-import prisma from '@/lib/prisma';
 
 // Configuración de Square
 const squareClient = new SquareClient({
@@ -32,8 +31,7 @@ export async function POST(request) {
         const paymentMethod = formData.get('paymentMethod');
         
         const name = formData.get('name');
-        const email = formData.get('email') || 'No especificado';
-        const phone = formData.get('phone');
+        const email = formData.get('email');
         const address = formData.get('address');
         const city = formData.get('city');
         const postalCode = formData.get('postalCode');
@@ -43,28 +41,10 @@ export async function POST(request) {
         let totalAmount = price;
         const isCod = paymentMethod === 'cod';
         
-        // Guardar pedido en base de datos
-        try {
-            await prisma.order.create({
-                data: {
-                    orderId,
-                    productName,
-                    quantity,
-                    totalAmount,
-                    paymentMethod,
-                    status: isCod ? 'pending' : 'pending_payment',
-                    customerName: name,
-                    email,
-                    phone,
-                    address,
-                    city,
-                    postalCode
-                }
-            });
-        } catch (dbError) {
-            console.error('Error guardando pedido en DB:', dbError);
-            // No bloqueamos el flujo si falla la DB, pero lo logueamos
-        }
+        // Ya no añadimos +3€ extra aquí porque el precio base ya es distinto para COD
+        // if (isCod) {
+        //    totalAmount += 3.00; 
+        // }
 
         // Lógica para CONTRAREEMBOLSO
         if (isCod) {
@@ -79,7 +59,6 @@ export async function POST(request) {
 💰 <b>Total a Cobrar:</b> ${totalAmount.toFixed(2)}€ (Precio COD)
 
 👤 <b>Cliente:</b> ${name}
-📞 <b>Teléfono:</b> ${phone}
 📧 <b>Email:</b> ${email}
 
 📍 <b>DIRECCIÓN DE ENVÍO:</b>
@@ -92,7 +71,7 @@ ${city}, CP: ${postalCode}
             }
             
             // Redirigir a success
-            return NextResponse.redirect(new URL(`/success?orderId=${orderId}&method=cod&amount=${totalAmount}&product=${encodeURIComponent(productName)}`, request.url), 303);
+            return NextResponse.redirect(new URL(`/success?orderId=${orderId}&method=cod`, request.url), 303);
         }
 
         // Lógica para TARJETA (Square Checkout API)
@@ -109,7 +88,7 @@ ${city}, CP: ${postalCode}
             checkoutOptions: {
                 askForShippingAddress: true,
                 merchantSupportEmail: 'badreddinnakhil@gmail.com',
-                redirectUrl: `${new URL(request.url).origin}/success?orderId=${orderId}&method=card&amount=${totalAmount}&product=${encodeURIComponent(productName)}`,
+                redirectUrl: `${new URL(request.url).origin}/success?orderId=${orderId}&method=card`,
             }
         };
 
@@ -134,11 +113,7 @@ ${city}, CP: ${postalCode}
 
 🆔 <b>ID Pedido:</b> #${orderId}
 💰 <b>Total:</b> ${totalAmount.toFixed(2)}€
-🔗 <b>Link Generado:</b> <a href="${paymentLink.url}">Pagar Aquí</a>
-
-👤 <b>Cliente:</b> ${name}
-📞 <b>Teléfono:</b> ${phone}
-📧 <b>Email:</b> ${email}
+� <b>Link Generado:</b> <a href="${paymentLink.url}">Pagar Aquí</a>
 
 <i>El cliente ha sido redirigido a la pasarela de pago.</i>
                 `;

@@ -24,21 +24,6 @@ export default function Home() {
     setModalData({ name, cardPrice, codPrice, quantity });
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
-
-    // Google Analytics Event: Begin Checkout
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'begin_checkout', {
-        currency: 'EUR',
-        value: codPrice,
-        items: [
-          {
-            item_name: name,
-            quantity: quantity,
-            price: codPrice
-          }
-        ]
-      });
-    }
   };
 
   const closeModal = () => {
@@ -127,7 +112,7 @@ export default function Home() {
       <section className="py-12 bg-stone-50 overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <div className="relative">
-            <img src="/image.png" alt="Plato de Jamón Ibérico Cortado a Cuchillo" className="rounded-full shadow-2xl mx-auto mb-12 border-8 border-white w-full max-w-md md:max-w-lg hover:scale-105 transition-transform duration-500" />
+            <img src="/plato-jamon.png" alt="Plato de Jamón Ibérico Cortado a Cuchillo" className="rounded-full shadow-2xl mx-auto mb-12 border-8 border-white w-full max-w-md md:max-w-lg hover:scale-105 transition-transform duration-500" />
             <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-3xl shadow-xl hidden md:block border border-stone-100 animate-bounce">
               <p className="font-serif text-2xl font-black text-jamon italic">"Calidad que se deshace en la boca"</p>
             </div>
@@ -234,22 +219,20 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Método de Pago</label>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="cod" checked={paymentMethod === 'cod'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
-                        <i className="fas fa-hand-holding-usd text-jamon text-lg sm:text-base"></i>
-                        <span>Contrareembolso</span>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Recomendado</span>
+                      <span className="flex items-center gap-2 font-bold text-sm">
+                        <i className="fas fa-hand-holding-usd text-jamon"></i> Contrareembolso
+                      </span>
+                      <span className="text-[10px] text-stone-400 mt-1">Recomendado</span>
                     </label>
-                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
+                    <label className={`relative flex flex-col p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
                       <input type="radio" name="paymentMethodDisplay" value="card" checked={paymentMethod === 'card'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
-                        <i className="fas fa-credit-card text-jamon text-lg sm:text-base"></i>
-                        <span>Tarjeta</span>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Square Gateway</span>
+                      <span className="flex items-center gap-2 font-bold text-sm">
+                        <i className="fas fa-credit-card text-jamon"></i> Tarjeta
+                      </span>
+                      <span className="text-[10px] text-stone-400 mt-1">Square Gateway</span>
                     </label>
                   </div>
                 </div>
@@ -258,12 +241,8 @@ export default function Home() {
                   <input type="text" name="name" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
                 </div>
                 <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Teléfono de Contacto</label>
-                  <input type="tel" name="phone" required placeholder="+34 600 000 000" className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Email (Opcional)</label>
-                  <input type="email" name="email" className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" placeholder="Para recibir confirmación (opcional)" />
+                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Email de contacto</label>
+                  <input type="email" name="email" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Dirección de Envío</label>

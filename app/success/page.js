@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -8,28 +8,8 @@ function SuccessContent() {
   const searchParams = useSearchParams();
   const method = searchParams.get('method');
   const orderId = searchParams.get('orderId') || 'PENDIENTE';
-  const amount = searchParams.get('amount');
-  const productName = searchParams.get('product');
 
   const isCod = method === 'cod';
-
-  useEffect(() => {
-    // Google Analytics Event: Purchase
-    if (typeof window !== 'undefined' && window.gtag && amount) {
-      window.gtag('event', 'purchase', {
-        transaction_id: orderId,
-        value: parseFloat(amount),
-        currency: 'EUR',
-        items: [
-          {
-            item_name: productName || 'Pack Ibérico',
-            price: parseFloat(amount),
-            quantity: 1
-          }
-        ]
-      });
-    }
-  }, [amount, orderId, productName]);
 
   return (
     <div className="max-w-md w-full bg-white rounded-[32px] shadow-2xl p-10 text-center border border-stone-200">
