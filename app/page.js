@@ -241,8 +241,12 @@ export default function Home() {
                   <input type="text" name="name" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
                 </div>
                 <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Email de contacto</label>
-                  <input type="email" name="email" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
+                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Teléfono de contacto</label>
+                  <input type="tel" name="phone" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" placeholder="+34 6XX XXX XXX" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Email de contacto (opcional)</label>
+                  <input type="email" name="email" className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Dirección de Envío</label>
