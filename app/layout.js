@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       <body className="bg-stone-50 text-stone-900">
         {children}
         <a 
-          href="https://wa.me/34631615097?text=quiero%20saber%20mas%20informaccion%20de%20los%20sobres%20de%20jamon" 
+          href="https://wa.me/34614070656?text=quiero%20saber%20mas%20informaccion%20de%20los%20sobres%20de%20jamon" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 z-[1000] flex items-center justify-center"
