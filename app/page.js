@@ -75,6 +75,7 @@ export default function Home() {
               <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase">
                 10 SOBRES (100g c/u)
               </div>
+              <img src="/freepik__talk__30913.png" alt="Jamón Ibérico" className="w-32 h-32 mx-auto mb-4 rounded-full object-cover" />
               <div className="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
                 72.99€
               </div>
@@ -89,6 +90,7 @@ export default function Home() {
               <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md">
                 20 SOBRES (100g c/u)
               </div>
+              <img src="/freepik__talk__30913.png" alt="Jamón Ibérico" className="w-32 h-32 mx-auto mb-4 rounded-full object-cover" />
               <div className="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
                 129.99€
               </div>
