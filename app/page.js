@@ -284,9 +284,9 @@ export default function Home() {
           <div className="font-serif text-3xl font-black text-jamon italic mb-6">IBÉRICOS GOURMET</div>
           <p className="text-sm max-w-md mx-auto mb-8">Selección premium de jamón de cebo de campo cortado a cuchillo por maestros jamoneros. Directo de la dehesa.</p>
           <div className="flex justify-center gap-8 text-xs uppercase tracking-widest font-bold mb-12">
-            <a href="#" className="hover:text-jamon transition-colors">Aviso Legal</a>
-            <a href="#" className="hover:text-jamon transition-colors">Privacidad</a>
-            <a href="#" className="hover:text-jamon transition-colors">Envíos</a>
+            <a href="/aviso-legal" className="hover:text-jamon transition-colors">Aviso Legal</a>
+            <a href="/politica-privacidad" className="hover:text-jamon transition-colors">Privacidad</a>
+            <a href="/envios" className="hover:text-jamon transition-colors">Envíos</a>
           </div>
           <div className="text-[10px] uppercase tracking-[0.3em] font-black">© 2024 Ibéricos Gourmet S.L.</div>
         </div>
