@@ -19,6 +19,36 @@ export default function Home() {
     city: '',
     postalCode: ''
   });
+  const [currentReview, setCurrentReview] = useState(0);
+
+  const reviews = [
+    {
+      name: 'María G.',
+      initials: 'MG',
+      text: '¡El mejor jamón que he probado en años! La calidad es excepcional y el corte a cuchillo marca la diferencia. Repetiré sin duda.',
+      time: 'Hace 2 horas',
+    },
+    {
+      name: 'Juan P.',
+      initials: 'JP',
+      text: 'Envío rapidísimo y el jamón llegó en perfectas condiciones. Mis invitados quedaron encantados. ¡Un 10!',
+      time: 'Ayer',
+    },
+    {
+      name: 'Ana R.',
+      initials: 'AR',
+      text: 'Siempre busco productos de calidad y este jamón ibérico ha superado mis expectativas. El sabor es increíble.',
+      time: 'Hace 3 días',
+    },
+  ];
+
+  const nextReview = () => {
+    setCurrentReview((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevReview = () => {
+    setCurrentReview((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+  };
 
   const openModal = (name, cardPrice, codPrice, quantity) => {
     setModalData({ name, cardPrice, codPrice, quantity });
@@ -120,6 +150,55 @@ export default function Home() {
             <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-3xl shadow-xl hidden md:block border border-stone-100 animate-bounce">
               <p className="font-serif text-2xl font-black text-jamon italic">"Calidad que se deshace en la boca"</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN CALIDAD - Carrusel de Reseñas */}
+      <section id="calidad" className="py-20 bg-gradient-to-br from-green-50 to-green-100 text-stone-900 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-serif text-4xl md:text-5xl font-black mb-12 leading-tight text-green-700">
+            Nuestros Clientes <span className="text-green-500">Hablan</span>
+          </h2>
+
+          <div className="relative w-full max-w-2xl mx-auto">
+            {/* Carousel Container */}
+            <div className="relative h-64 overflow-hidden rounded-3xl shadow-xl bg-white border border-green-200">
+              {/* Reviews */}
+              <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentReview * 100}%)` }}>
+                {reviews.map((review, index) => (
+                  <div key={index} className="w-full flex-shrink-0 p-6 flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                      {review.initials}
+                    </div>
+                    <div className="flex-grow text-left">
+                      <p className="font-bold text-green-800">{review.name}</p>
+                      <div className="bg-green-50 p-4 rounded-xl shadow-sm text-sm relative">
+                        <p className="text-stone-700">{review.text}</p>
+                        <span className="absolute bottom-1 right-2 text-xs text-stone-400">
+                          <i className="fab fa-whatsapp text-green-500 mr-1"></i>
+                          {review.time}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevReview}
+              className="absolute top-1/2 left-4 -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-green-100 transition-colors text-green-600 focus:outline-none"
+            >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+            <button
+              onClick={nextReview}
+              className="absolute top-1/2 right-4 -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-green-100 transition-colors text-green-600 focus:outline-none"
+            >
+              <i className="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>
