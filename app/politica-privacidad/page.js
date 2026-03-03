@@ -16,8 +16,15 @@ export default function PoliticaPrivacidadPage() {
           <section className="mb-8">
             <h2 className="font-serif text-2xl font-bold text-stone-800 mb-4">1. Responsable del Tratamiento de Datos</h2>
             <p className="text-stone-600 leading-relaxed mb-4">
-              El responsable del tratamiento de sus datos es [Tu Nombre/Razón Social], con NIF [Tu CIF/NIF] y domicilio en [Tu Dirección Física].
-              Puede contactar con nosotros a través del correo electrónico [Tu Email de Contacto].
+              La presente Política de Privacidad establece los términos en que Ibéricos Gourmet usa y protege la información que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo hacemos asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo, esta Política de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que está de acuerdo con dichos cambios.
+              <br /><br />
+              <strong>Responsable del Tratamiento:</strong> Ibéricos Gourmet
+              <br />
+              <strong>NIF/CIF:</strong> [Tu CIF/NIF]
+              <br />
+              <strong>Dirección:</strong> Guijuelo
+              <br />
+              <strong>Correo Electrónico:</strong> badreddinnakhil@gmail.com
             </p>
           </section>
 

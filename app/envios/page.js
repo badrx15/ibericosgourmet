@@ -110,7 +110,7 @@ const ShippingPolicyPage = () => {
             Si experimentas algún problema con la entrega de tu pedido (retrasos, paquetes dañados, etc.), por favor, ponte en contacto con nuestro servicio de atención al cliente lo antes posible. Estaremos encantados de ayudarte a resolver cualquier incidencia.
           </p>
           <p className="leading-relaxed">
-            Puedes contactarnos a través de nuestro formulario de contacto o enviando un correo electrónico a [tu_email@ejemplo.com].
+            Puedes contactarnos a través de nuestro formulario de contacto o enviando un correo electrónico a badreddinnakhil@gmail.com.
           </p>
         </section>
       </main>
