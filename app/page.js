@@ -171,6 +171,27 @@ export default function Home() {
             </div>
           </div>
 
+          {/* WhatsApp Purchase Section */}
+          <section className="py-12 bg-green-50 text-green-800 rounded-3xl shadow-lg max-w-4xl mx-auto mb-16">
+            <div className="text-center px-4">
+              <h3 className="font-serif text-3xl font-black mb-4">
+                ¿Prefieres comprar por <span className="text-green-600">WhatsApp</span>?
+              </h3>
+              <p className="text-lg mb-8 max-w-2xl mx-auto">
+                Si lo deseas, puedes realizar tu pedido o consultar cualquier duda directamente con nosotros a través de WhatsApp. ¡Te atenderemos encantados!
+              </p>
+              <a
+                href="https://wa.me/34614070656?text=Hola,%20me%20gustaría%20hacer%20un%20pedido%20o%20consultar%20sobre%20los%20productos."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-green-500 text-white text-xl font-bold px-8 py-4 rounded-full shadow-xl hover:bg-green-600 transition-all transform hover:scale-105"
+              >
+                <i className="fab fa-whatsapp text-2xl mr-3"></i>
+                Comprar por WhatsApp
+              </a>
+            </div>
+          </section>
+
           {/* Badges */}
           <div className="flex flex-wrap justify-center gap-8 text-stone-400 font-bold text-sm uppercase tracking-widest">
             <div className="flex items-center gap-2"><i className="fas fa-truck text-jamon"></i> Envío Gratis</div>
