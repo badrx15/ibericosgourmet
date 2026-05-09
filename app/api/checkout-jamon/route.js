@@ -73,7 +73,7 @@ ${city}, CP: ${postalCode}
             }
             
             // Redirigir a success
-            return NextResponse.redirect(new URL(`/success?orderId=${orderId}&method=cod`, request.url), 303);
+            return NextResponse.redirect(new URL(`/success?orderId=${orderId}&method=cod&price=${totalAmount}&currency=EUR`, request.url), 303);
         }
 
         // Lógica para TARJETA (Square Checkout API)
@@ -90,7 +90,7 @@ ${city}, CP: ${postalCode}
             checkoutOptions: {
                 askForShippingAddress: true,
                 merchantSupportEmail: 'badreddinnakhil@gmail.com',
-                redirectUrl: `${new URL(request.url).origin}/success?orderId=${orderId}&method=card`,
+                redirectUrl: `${new URL(request.url).origin}/success?orderId=${orderId}&method=card&price=${totalAmount}&currency=EUR`,
             }
         };
 

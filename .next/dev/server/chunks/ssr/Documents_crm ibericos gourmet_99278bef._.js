@@ -34,8 +34,8 @@ function RootLayout({ children }) {
                         rel: "stylesheet",
                         href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
                         integrity: "sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==",
-                        crossorigin: "anonymous",
-                        referrerpolicy: "no-referrer"
+                        crossOrigin: "anonymous",
+                        referrerPolicy: "no-referrer"
                     }, void 0, false, {
                         fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
                         lineNumber: 11,
@@ -46,6 +46,44 @@ function RootLayout({ children }) {
                     }, void 0, false, {
                         fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
                         lineNumber: 12,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$crm__ibericos__gourmet$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("script", {
+                        dangerouslySetInnerHTML: {
+                            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', process.env.NEXT_PUBLIC_META_PIXEL_ID);
+              fbq('track', 'PageView');
+            `
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
+                        lineNumber: 14,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$crm__ibericos__gourmet$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("noscript", {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$crm__ibericos__gourmet$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                            height: "1",
+                            width: "1",
+                            style: {
+                                display: 'none'
+                            },
+                            src: `https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_META_PIXEL_ID}&ev=PageView&noscript=1`
+                        }, void 0, false, {
+                            fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
+                            lineNumber: 31,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
+                        lineNumber: 30,
                         columnNumber: 9
                     }, this)
                 ]
@@ -68,18 +106,18 @@ function RootLayout({ children }) {
                             className: "fab fa-whatsapp text-2xl"
                         }, void 0, false, {
                             fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
-                            lineNumber: 23,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
-                        lineNumber: 16,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
-                lineNumber: 14,
+                lineNumber: 40,
                 columnNumber: 7
             }, this)
         ]
