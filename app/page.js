@@ -138,34 +138,66 @@ export default function Home() {
           
           {/* Main Offer Grid */}
           <div id="ofertas" className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-16">
+            {/* Pack 5 */}
+            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
+                5 SOBRES (100g c/u)
+              </div>
+              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
+              <span className="text-2xl font-bold text-jamon">x5</span>
+              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
+                37,90€
+              </div>
+              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
+              <button onClick={() => openModal('Pack 5 Sobres Ibérico', 37.90, 37.90, 5)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
+                PEDIR PACK 5
+              </button>
+            </div>
+
             {/* Pack 10 */}
-            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-10 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase">
+            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
                 10 SOBRES (100g c/u)
               </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-64 h-64 mx-auto mb-4 object-cover" />
+              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
               <span className="text-2xl font-bold text-jamon">x10</span>
-              <div className="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
-                72.99€
+              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
+                61,90€
               </div>
-              <div className="text-stone-400 font-bold uppercase text-xs tracking-widest mb-8">Envío Gratis + Regalo</div>
-              <button onClick={() => openModal('Pack 10 Sobres Ibérico', 67.99, 72.99, 10)} className="w-full bg-jamon text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
+              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
+              <button onClick={() => openModal('Pack 10 Sobres Ibérico', 61.90, 61.90, 10)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
                 PEDIR PACK 10
               </button>
             </div>
 
+            {/* Pack 15 */}
+            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
+                15 SOBRES (100g c/u)
+              </div>
+              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
+              <span className="text-2xl font-bold text-jamon">x15</span>
+              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
+                84,90€
+              </div>
+              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
+              <button onClick={() => openModal('Pack 15 Sobres Ibérico', 84.90, 84.90, 15)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
+                PEDIR PACK 15
+              </button>
+            </div>
+
             {/* Pack 20 */}
-            <div className="bg-white rounded-[2rem] border-4 border-yellow-500 p-10 relative group shadow-2xl scale-105 z-10">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md">
+            <div className="bg-white rounded-[2rem] border-4 border-yellow-500 p-8 relative group shadow-2xl scale-105 z-10">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md whitespace-nowrap">
                 20 SOBRES (100g c/u)
               </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-64 h-64 mx-auto mb-4 object-cover" />
+              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
               <span className="text-2xl font-bold text-jamon">x20</span>
-              <div className="text-6xl font-black text-jamon mb-4 mt-4 tracking-tighter">
-                129.99€
+              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
+                109,90€
               </div>
-              <div className="text-stone-500 font-bold uppercase text-xs tracking-widest mb-8">Mejor Valor - Envío Gratis + Regalo</div>
-              <button onClick={() => openModal('Pack 20 Sobres Ibérico', 121.99, 129.99, 20)} className="w-full bg-stone-900 text-white py-5 rounded-2xl font-black text-lg shadow-xl hover:bg-jamon transition-all">
+              <div className="text-stone-500 font-bold uppercase text-[10px] tracking-widest mb-6">Mejor Valor - Envío Gratis + Pago Contrarreembolso</div>
+              <button onClick={() => openModal('Pack 20 Sobres Ibérico', 109.90, 109.90, 20)} className="w-full bg-stone-900 text-white py-4 rounded-2xl font-black text-lg shadow-xl hover:bg-jamon transition-all">
                 PEDIR PACK 20
               </button>
             </div>
@@ -195,8 +227,8 @@ export default function Home() {
           {/* Badges */}
           <div className="flex flex-wrap justify-center gap-8 text-stone-400 font-bold text-sm uppercase tracking-widest">
             <div className="flex items-center gap-2"><i className="fas fa-truck text-jamon"></i> Envío Gratis</div>
-            <div className="flex items-center gap-2"><i className="fas fa-gift text-jamon"></i> Regalo Sorpresa</div>
-            <div className="flex items-center gap-2"><i className="fas fa-certificate text-jamon"></i> 75% Ibérico</div>
+            <div className="flex items-center gap-2"><i className="fas fa-hand-holding-usd text-jamon"></i> Pago Contrarreembolso</div>
+            <div className="flex items-center gap-2"><i className="fab fa-whatsapp text-jamon"></i> Pedidos por Whatsapp</div>
           </div>
         </div>
       </header>
