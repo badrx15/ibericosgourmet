@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { products } from '@/lib/products';
+import { products } from '../../../lib/products';
 
 export default function ProductPage({ params }) {
   // En Next.js 14/15, params es una Promise en Server Components, pero aquí en Client Component necesitamos desencapsular o usar hook.

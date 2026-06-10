@@ -75,7 +75,7 @@ function RootLayout({ children }) {
                             style: {
                                 display: 'none'
                             },
-                            src: `https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_META_PIXEL_ID}&ev=PageView&noscript=1`
+                            src: `https://www.facebook.com/tr?id=${("TURBOPACK compile-time value", "1616130006351651")}&ev=PageView&noscript=1`
                         }, void 0, false, {
                             fileName: "[project]/Documents/crm ibericos gourmet/app/layout.js",
                             lineNumber: 31,
