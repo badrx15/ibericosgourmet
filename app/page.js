@@ -83,11 +83,11 @@ export default function Home() {
             <i className="fas fa-piggy-bank"></i> IBÉRICOS GOURMET
           </div>
           <div className="hidden md:flex gap-8 font-semibold text-stone-600">
-            <a href="#ofertas" className="hover:text-jamon transition-colors">Ofertas</a>
+            <Link href="/productos" className="hover:text-jamon transition-colors">Productos</Link>
             <a href="#mayorista" className="hover:text-jamon transition-colors font-bold text-indigo-600">Al Por Mayor</a>
             <a href="#calidad" className="hover:text-jamon transition-colors">Calidad</a>
           </div>
-          <a href="#ofertas" className="bg-jamon text-white px-6 py-2 rounded-full font-bold text-sm hover:opacity-90 transition-all">COMPRAR AHORA</a>
+          <Link href="/productos" className="bg-jamon text-white px-6 py-2 rounded-full font-bold text-sm hover:opacity-90 transition-all">COMPRAR AHORA</Link>
         </div>
       </nav>
 
@@ -105,36 +105,9 @@ export default function Home() {
             La excelencia del ibérico en sobres de 100g, listos para disfrutar. Envío Gratis y Regalo Sorpresa incluido.
           </p>
           
-          {/* Main Offer Grid */}
-          <div id="ofertas" className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-16">
-            {products.map((product) => (
-              <div key={product.id} className={`bg-white rounded-[2rem] border-4 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl ${product.popular ? 'border-yellow-500 shadow-2xl scale-105 z-10' : 'border-stone-100'}`}>
-                {product.popular ? (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md whitespace-nowrap">
-                    {product.title} {product.subtitle}
-                  </div>
-                ) : (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
-                    {product.title} {product.subtitle}
-                  </div>
-                )}
-                
-                <img src={product.image} alt={product.name} className="w-48 h-48 mx-auto mb-4 object-cover group-hover:scale-105 transition-transform" />
-                
-                <span className="text-2xl font-bold text-jamon">x{product.quantity}</span>
-                <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                  {product.price.toFixed(2).replace('.', ',')}€
-                </div>
-                <div className={`font-bold uppercase text-[10px] tracking-widest mb-6 ${product.popular ? 'text-stone-500' : 'text-stone-400'}`}>
-                  {product.popular ? 'Mejor Valor - ' : ''}Envío Gratis + Pago Contrarreembolso
-                </div>
-                
-                <Link href={`/producto/${product.id}`} className={`block w-full py-4 rounded-2xl font-black text-lg shadow-xl hover:scale-[1.02] transition-all ${product.popular ? 'bg-stone-900 text-white hover:bg-jamon' : 'bg-jamon text-white shadow-jamon/20'}`}>
-                  VER DETALLES Y COMPRAR
-                </Link>
-              </div>
-            ))}
-          </div>
+          <Link href="/productos" className="inline-block bg-jamon text-white px-10 py-5 rounded-2xl font-black text-xl shadow-xl shadow-jamon/20 hover:scale-105 transition-all mb-16">
+            VER TODOS LOS PRODUCTOS
+          </Link>
 
           {/* WhatsApp Purchase Section */}
           <section className="py-12 bg-green-50 text-green-800 rounded-3xl shadow-lg max-w-4xl mx-auto mb-16">
