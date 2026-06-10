@@ -53,9 +53,9 @@ export default function ProductosPage() {
               <img src={product.image} alt={product.name} className="w-56 h-56 mx-auto mb-6 object-cover group-hover:scale-105 transition-transform" />
               
               <div className="text-center">
-                <span className="text-2xl font-bold text-jamon">x{product.quantity}</span>
+                {!product.hasOptions && <span className="text-2xl font-bold text-jamon">x{product.quantity}</span>}
                 <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                  {product.price.toFixed(2).replace('.', ',')}€
+                  {product.hasOptions ? 'Desde ' : ''}{product.price.toFixed(2).replace('.', ',')}€
                 </div>
                 <div className={`font-bold uppercase text-[10px] tracking-widest mb-8 ${product.popular ? 'text-stone-500' : 'text-stone-400'}`}>
                   {product.popular ? 'Mejor Valor - ' : ''}Envío Gratis + Pago Contrarreembolso
