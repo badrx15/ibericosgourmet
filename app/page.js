@@ -1,25 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { products } from '@/lib/products';
 import './globals.css';
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({
-    name: '',
-    cardPrice: 0,
-    codPrice: 0,
-    quantity: 0
-  });
-  const [paymentMethod, setPaymentMethod] = useState('cod');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    address: '',
-    city: '',
-    postalCode: ''
-  });
-
   const [currentReview, setCurrentReview] = useState(0);
 
   const reviews = [
@@ -88,23 +74,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [reviews.length]);
 
-  const openModal = (name, cardPrice, codPrice, quantity) => {
-    setModalData({ name, cardPrice, codPrice, quantity });
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  const handlePaymentChange = (e) => {
-    setPaymentMethod(e.target.value);
-  };
-
-  const currentPrice = paymentMethod === 'cod' ? modalData.codPrice : modalData.cardPrice;
-
   return (
     <div className="bg-stone-50 text-stone-900 font-sans">
       {/* Header / Nav */}
@@ -138,69 +107,33 @@ export default function Home() {
           
           {/* Main Offer Grid */}
           <div id="ofertas" className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-16">
-            {/* Pack 5 */}
-            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
-                5 SOBRES (100g c/u)
+            {products.map((product) => (
+              <div key={product.id} className={`bg-white rounded-[2rem] border-4 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl ${product.popular ? 'border-yellow-500 shadow-2xl scale-105 z-10' : 'border-stone-100'}`}>
+                {product.popular ? (
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md whitespace-nowrap">
+                    {product.title} {product.subtitle}
+                  </div>
+                ) : (
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
+                    {product.title} {product.subtitle}
+                  </div>
+                )}
+                
+                <img src={product.image} alt={product.name} className="w-48 h-48 mx-auto mb-4 object-cover group-hover:scale-105 transition-transform" />
+                
+                <span className="text-2xl font-bold text-jamon">x{product.quantity}</span>
+                <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
+                  {product.price.toFixed(2).replace('.', ',')}€
+                </div>
+                <div className={`font-bold uppercase text-[10px] tracking-widest mb-6 ${product.popular ? 'text-stone-500' : 'text-stone-400'}`}>
+                  {product.popular ? 'Mejor Valor - ' : ''}Envío Gratis + Pago Contrarreembolso
+                </div>
+                
+                <Link href={`/producto/${product.id}`} className={`block w-full py-4 rounded-2xl font-black text-lg shadow-xl hover:scale-[1.02] transition-all ${product.popular ? 'bg-stone-900 text-white hover:bg-jamon' : 'bg-jamon text-white shadow-jamon/20'}`}>
+                  VER DETALLES Y COMPRAR
+                </Link>
               </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
-              <span className="text-2xl font-bold text-jamon">x5</span>
-              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                37,90€
-              </div>
-              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
-              <button onClick={() => openModal('Pack 5 Sobres Ibérico', 37.90, 37.90, 5)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
-                PEDIR PACK 5
-              </button>
-            </div>
-
-            {/* Pack 10 */}
-            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
-                10 SOBRES (100g c/u)
-              </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
-              <span className="text-2xl font-bold text-jamon">x10</span>
-              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                61,90€
-              </div>
-              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
-              <button onClick={() => openModal('Pack 10 Sobres Ibérico', 61.90, 61.90, 10)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
-                PEDIR PACK 10
-              </button>
-            </div>
-
-            {/* Pack 15 */}
-            <div className="bg-white rounded-[2rem] border-4 border-stone-100 p-8 relative group hover:border-jamon/20 transition-all shadow-sm hover:shadow-2xl">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest uppercase whitespace-nowrap">
-                15 SOBRES (100g c/u)
-              </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
-              <span className="text-2xl font-bold text-jamon">x15</span>
-              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                84,90€
-              </div>
-              <div className="text-stone-400 font-bold uppercase text-[10px] tracking-widest mb-6">Envío Gratis + Pago Contrarreembolso</div>
-              <button onClick={() => openModal('Pack 15 Sobres Ibérico', 84.90, 84.90, 15)} className="w-full bg-jamon text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-jamon/20 hover:scale-[1.02] transition-all">
-                PEDIR PACK 15
-              </button>
-            </div>
-
-            {/* Pack 20 */}
-            <div className="bg-white rounded-[2rem] border-4 border-yellow-500 p-8 relative group shadow-2xl scale-105 z-10">
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 gold-gradient text-jamon px-8 py-2 rounded-full text-xs font-black tracking-widest uppercase shadow-md whitespace-nowrap">
-                20 SOBRES (100g c/u)
-              </div>
-              <img src="/product-image.png" alt="Jamón Ibérico" className="w-48 h-48 mx-auto mb-4 object-cover" />
-              <span className="text-2xl font-bold text-jamon">x20</span>
-              <div className="text-5xl font-black text-jamon mb-4 mt-2 tracking-tighter">
-                109,90€
-              </div>
-              <div className="text-stone-500 font-bold uppercase text-[10px] tracking-widest mb-6">Mejor Valor - Envío Gratis + Pago Contrarreembolso</div>
-              <button onClick={() => openModal('Pack 20 Sobres Ibérico', 109.90, 109.90, 20)} className="w-full bg-stone-900 text-white py-4 rounded-2xl font-black text-lg shadow-xl hover:bg-jamon transition-all">
-                PEDIR PACK 20
-              </button>
-            </div>
+            ))}
           </div>
 
           {/* WhatsApp Purchase Section */}
@@ -353,97 +286,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modal de Compra */}
-      {isModalOpen && (
-        <div id="buyModal" className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-          <div className="bg-white rounded-[2.5rem] w-full max-w-lg overflow-hidden shadow-2xl">
-            <div className="bg-jamon p-8 text-white flex justify-between items-center">
-              <div>
-                <h3 className="font-serif text-2xl font-bold">Finalizar Pedido</h3>
-                <p className="text-white/60 text-sm">Ibéricos Gourmet - Corte a Cuchillo</p>
-              </div>
-              <button onClick={closeModal} className="text-white/60 hover:text-white text-2xl"><i className="fas fa-times"></i></button>
-            </div>
-            <form action="/api/checkout-jamon" method="POST" className="p-8 space-y-4 max-h-[70vh] overflow-y-auto">
-              <input type="hidden" name="productName" value={modalData.name} />
-              <input type="hidden" name="price" value={currentPrice} />
-              <input type="hidden" name="quantity" value={modalData.quantity} />
-              <input type="hidden" name="paymentMethod" value={paymentMethod} />
-              
-              <div className="flex items-center justify-between p-5 bg-stone-50 rounded-2xl border border-stone-100 mb-6">
-                <div>
-                  <div className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Pack Seleccionado</div>
-                  <div className="font-black text-jamon text-lg">{modalData.name}</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Precio Total</div>
-                  <div className="font-black text-2xl">{currentPrice.toFixed(2)}€</div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-2">Método de Pago</label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'cod' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
-                      <input type="radio" name="paymentMethodDisplay" value="cod" checked={paymentMethod === 'cod'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
-                        <i className="fas fa-hand-holding-usd text-jamon text-lg sm:text-base"></i>
-                        <span>Contrareembolso</span>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Recomendado</span>
-                    </label>
-                    <label className={`relative flex flex-col p-3 sm:p-4 bg-stone-50 border-2 rounded-2xl cursor-pointer hover:border-jamon/30 transition-all items-center text-center ${paymentMethod === 'card' ? 'border-jamon bg-jamon/5' : 'border-stone-200'}`}>
-                      <input type="radio" name="paymentMethodDisplay" value="card" checked={paymentMethod === 'card'} onChange={handlePaymentChange} className="absolute opacity-0" />
-                      <div className="flex flex-col items-center gap-1 sm:flex-row sm:gap-2 font-bold text-xs sm:text-sm">
-                        <i className="fas fa-credit-card text-jamon text-lg sm:text-base"></i>
-                        <span>Tarjeta</span>
-                      </div>
-                      <span className="text-[9px] sm:text-[10px] text-stone-400 mt-1">Square Gateway</span>
-                    </label>
-                  </div>
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Nombre Completo</label>
-                  <input type="text" name="name" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Teléfono de contacto</label>
-                  <input type="tel" name="phone" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" placeholder="+34 6XX XXX XXX" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Email de contacto (opcional)</label>
-                  <input type="email" name="email" className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Dirección de Envío</label>
-                  <input type="text" name="address" required placeholder="Calle, número, piso..." className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Ciudad</label>
-                  <input type="text" name="city" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-1">Código Postal</label>
-                  <input type="text" name="postalCode" required className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl focus:ring-2 focus:ring-jamon outline-none transition-all" />
-                </div>
-              </div>
-
-              <button type="submit" className="w-full bg-jamon text-white py-5 rounded-2xl font-black text-xl shadow-xl shadow-jamon/20 hover:opacity-90 transition-all mt-6">
-                {paymentMethod === 'cod' ? 'CONFIRMAR PEDIDO (CONTRAREEMBOLSO)' : 'PAGAR Y RECIBIR EN CASA'}
-              </button>
-              <div className="flex items-center justify-center gap-4 text-stone-400">
-                <i className="fab fa-stripe text-2xl"></i>
-                <i className="fab fa-cc-visa text-2xl"></i>
-                <i className="fab fa-cc-mastercard text-2xl"></i>
-                <i className="fab fa-apple-pay text-2xl"></i>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Footer */}
+      {/* SECCIÓN AL POR MAYOR */}
       <footer className="bg-white text-stone-400 py-16 border-t border-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="font-serif text-3xl font-black text-jamon italic mb-6">IBÉRICOS GOURMET</div>
