@@ -115,6 +115,17 @@ export default function ProductPage({ params }) {
                 <p className="text-stone-500 font-medium text-lg leading-relaxed max-w-md mx-auto">
                   {product.description}
                 </p>
+
+                {product.features && (
+                  <ul className="mt-8 mb-4 space-y-3 text-left max-w-md mx-auto">
+                    {product.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-stone-600 font-medium">
+                        <i className="fas fa-check-circle text-jamon"></i>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
 
